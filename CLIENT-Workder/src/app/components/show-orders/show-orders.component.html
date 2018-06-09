@@ -1,0 +1,28 @@
+<!--Si no hay ordenes mostraremos mensaje alerta.-->
+    <div *ngIf="!orders">
+        <div class="alert alert-danger">
+            No hay ordenes disponibles.
+        </div>
+    </div>
+
+  <div *ngIf="orders">
+    <h1 class="text-center text-uppercase">{{title}}</h1><br>
+
+    
+    <ul class="list-group list-group-flush  ">
+        <input type="text" placeholder="Indique orden a buscar" [(ngModel)]="term" id="finder" class="mx-auto"><br>
+        <li *ngFor="let order of orders |filter:term" class="list-group-item d-flex justify-content-between align-items-center">
+
+            <a [routerLink]="['/order',order.id]" class="lead mx-auto">{{order.title}}</a>
+
+            <div *ngIf="order.finish == 1">
+                <a  class="btn btn-danger text-white" [routerLink]="['/orderEdit', order.id]">
+                    <img width="5%" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDQ5MC4zMzcgNDkwLjMzNyIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNDkwLjMzNyA0OTAuMzM3OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjUxMnB4IiBoZWlnaHQ9IjUxMnB4Ij4KPGc+Cgk8Zz4KCQk8cGF0aCBkPSJNMjI5LjksMTQ1LjM3OWwtNDcuNSw0Ny41Yy0xNy41LDE3LjUtMzUuMSwzNS01Mi41LDUyLjdjLTQuMSw0LjItNy4yLDkuOC04LjQsMTUuM2MtNi4zLDI4LjktMTIuNCw1Ny44LTE4LjUsODYuNyAgICBsLTMuNCwxNmMtMS42LDcuOCwwLjUsMTUuNiw1LjgsMjAuOWM0LjEsNC4xLDkuOCw2LjQsMTUuOCw2LjRjMS43LDAsMy40LTAuMiw1LjEtMC41bDE3LjYtMy43YzI4LTUuOSw1Ni4xLTExLjksODQuMS0xNy43ICAgIGM2LjUtMS40LDEyLTQuMywxNi43LTljNzguNi03OC43LDE1Ny4yLTE1Ny4zLDIzNS44LTIzNS44YzUuOC01LjgsOS0xMi43LDkuOC0yMS4yYzAuMS0xLjQsMC0yLjgtMC4zLTQuMWMtMC41LTItMC45LTQuMS0xLjQtNi4xICAgIGMtMS4xLTUuMS0yLjMtMTAuOS00LjctMTYuNWwwLDBjLTE0LjctMzMuNi0zOS4xLTU3LjYtNzIuNS03MS4xYy02LjctMi43LTEzLjgtMy42LTIwLTQuNGwtMS43LTAuMmMtOS0xLjEtMTcuMiwxLjktMjQuMyw5LjEgICAgQzMyMC40LDU0Ljg3OSwyNzUuMSwxMDAuMTc5LDIyOS45LDE0NS4zNzl6IE0zODYuNCwyNC42NzljMC4yLDAsMC4zLDAsMC41LDBsMS43LDAuMmM1LjIsMC42LDEwLDEuMiwxMy44LDIuOCAgICBjMjcuMiwxMSw0Ny4yLDMwLjYsNTkuMyw1OC4yYzEuNCwzLjIsMi4zLDcuMywzLjIsMTEuNmMwLjMsMS42LDAuNywzLjIsMSw0LjhjLTAuNCwxLjgtMS4xLDMtMi41LDQuMyAgICBjLTc4LjcsNzguNS0xNTcuMywxNTcuMi0yMzUuOSwyMzUuOGMtMS4zLDEuMy0yLjUsMS45LTQuMywyLjNjLTI4LjEsNS45LTU2LjEsMTEuOC04NC4yLDE3LjdsLTE0LjgsMy4xbDIuOC0xMy4xICAgIGM2LjEtMjguOCwxMi4yLTU3LjcsMTguNC04Ni41YzAuMi0wLjksMS0yLjMsMS45LTMuM2MxNy40LTE3LjYsMzQuOC0zNS4xLDUyLjMtNTIuNWw0Ny41LTQ3LjVjNDUuMy00NS4zLDkwLjYtOTAuNiwxMzUuOC0xMzYgICAgQzM4NC44LDI0Ljk3OSwzODUuNywyNC42NzksMzg2LjQsMjQuNjc5eiIgZmlsbD0iI0ZGRkZGRiIvPgoJCTxwYXRoIGQ9Ik0zOC45LDEwOS4zNzloMTc0LjZjNi44LDAsMTIuMy01LjUsMTIuMy0xMi4zcy01LjUtMTIuMy0xMi4zLTEyLjNIMzguOWMtMjEuNSwwLTM4LjksMTcuNS0zOC45LDM4Ljl2MzI3LjQgICAgYzAsMjEuNSwxNy41LDM4LjksMzguOSwzOC45aDMyNy4zYzIxLjUsMCwzOC45LTE3LjUsMzguOS0zOC45di0xNjcuNWMwLTYuOC01LjUtMTIuMy0xMi4zLTEyLjNzLTEyLjMsNS41LTEyLjMsMTIuM3YxNjcuNSAgICBjMCw3LjktNi41LDE0LjQtMTQuNCwxNC40SDM4LjljLTcuOSwwLTE0LjQtNi41LTE0LjQtMTQuNHYtMzI3LjNDMjQuNSwxMTUuODc5LDMxLDEwOS4zNzksMzguOSwxMDkuMzc5eiIgZmlsbD0iI0ZGRkZGRiIvPgoJPC9nPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=" />
+                    Editar
+                </a>
+            </div>
+
+        </li>
+    </ul>
+    
+  </div>

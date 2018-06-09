@@ -1,0 +1,36 @@
+<h1 class="text-center">{{title}}</h1>
+
+<div class="card bg-dark text-white text-center">
+        <div class="card-header">
+            <h1 class="card-title display-3">{{order.title}}</h1>
+        </div>
+        <div class="card-body">
+                <p class="card-text lead">{{order.description}}</p>
+                <div *ngIf="order.difficulty == 'Baja'">
+                    <p class="badge badge-success">
+                        {{order.difficulty}}
+                        </p>
+                </div>
+    
+                <div *ngIf="order.difficulty == 'Media'">
+                    <p class="badge badge-warning">
+                        {{order.difficulty}}
+                        </p>
+                </div>
+    
+                <div *ngIf="order.difficulty == 'Alta'">
+                    <p class="badge badge-danger">
+                        {{order.difficulty}}
+                        </p>
+                </div>
+        </div>
+        <div class="card-footer text-muted">
+            {{order.dateInit}} - o - {{order.dateFinish}}
+        </div>
+</div>
+
+<div *ngIf="order.finish == 1">
+    <span (click)="completeOrder(order.id)" class="btn btn-success" style="width:100%">
+        <img width="3%" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI2IDI2IiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAyNiAyNiIgd2lkdGg9IjUxMnB4IiBoZWlnaHQ9IjUxMnB4Ij4KICA8cGF0aCBkPSJtLjMsMTRjLTAuMi0wLjItMC4zLTAuNS0wLjMtMC43czAuMS0wLjUgMC4zLTAuN2wxLjQtMS40YzAuNC0wLjQgMS0wLjQgMS40LDBsLjEsLjEgNS41LDUuOWMwLjIsMC4yIDAuNSwwLjIgMC43LDBsMTMuNC0xMy45aDAuMXYtOC44ODE3OGUtMTZjMC40LTAuNCAxLTAuNCAxLjQsMGwxLjQsMS40YzAuNCwwLjQgMC40LDEgMCwxLjRsMCwwLTE2LDE2LjZjLTAuMiwwLjItMC40LDAuMy0wLjcsMC4zLTAuMywwLTAuNS0wLjEtMC43LTAuM2wtNy44LTguNC0uMi0uM3oiIGZpbGw9IiNGRkZGRkYiLz4KPC9zdmc+Cg==" />
+    </span>
+</div>

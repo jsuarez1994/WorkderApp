@@ -1,0 +1,13 @@
+#finder{
+      background:rgb(252, 96, 7);
+      font-size:1.2em;
+      width:100%;
+}
+
+a{
+      color: black;
+}
+
+a:hover{
+      text-decoration: none;
+}

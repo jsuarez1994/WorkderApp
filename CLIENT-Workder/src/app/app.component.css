@@ -1,0 +1,9 @@
+#company{
+      color: black;
+}
+
+@media (max-width: 756px){
+      .opc{
+            width: 5%;
+      }
+}

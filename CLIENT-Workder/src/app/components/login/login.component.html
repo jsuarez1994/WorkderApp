@@ -1,0 +1,32 @@
+    <!--Mensajes de Error/Hecho-->
+    <div class="alert alert-success" *ngIf="status == 'success'">
+        Te has identificado correctamente
+    </div>
+
+    <div class="alert alert-danger" *ngIf="status == 'error'">
+        Fallo al identificar
+    </div>
+
+    <!--Formulario-->
+    <h1 class="display-1 text-center">{{title}}</h1> <BR> 
+    <div class="d-flex justify-content-center">            
+        <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="col-md-5">
+            <input type="email" name="email" #email="ngModel" 
+            [(ngModel)]="user.email" placeholder="Introduzca Email" class="form-control" required>
+            <span *ngIf="!email.valid && email.touched" class="badge badge-danger">Email no válido</span>
+            <br><br>
+
+            <input type="password" name="password" #password="ngModel" 
+            [(ngModel)]="user.password" placeholder="Introduzca Password" class="form-control" required>
+            <span *ngIf="!password.valid && password.touched" class="badge badge-danger">Password no válido</span>
+            <br><br>
+
+            <!--Disabled se habilitará si cumple condicion-->
+            <div class="d-flex justify-content-center"> 
+                <button type="submit" class="btn btn-success" [disabled]="!loginForm.form.valid">
+                    <img width="5%" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDU4IDU4IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1OCA1ODsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+CjxnPgoJPHBhdGggZD0iTTI5LDMwYy0yLjIwNiwwLTQsMS43OTQtNCw0djZjMCwyLjIwNiwxLjc5NCw0LDQsNHM0LTEuNzk0LDQtNHYtNkMzMywzMS43OTQsMzEuMjA2LDMwLDI5LDMweiBNMzEsNDBjMCwxLjEwMy0wLjg5NywyLTIsMiAgIHMtMi0wLjg5Ny0yLTJ2LTZjMC0xLjEwMywwLjg5Ny0yLDItMnMyLDAuODk3LDIsMlY0MHoiIGZpbGw9IiNGRkZGRkYiLz4KCTxwYXRoIGQ9Ik00MCwyMS4zMTRWMTAuMjJDNDAsNC41ODUsMzUuMDY1LDAsMjksMFMxOCw0LjU4NSwxOCwxMC4yMnYxMS4wOTRDMTIuNTg0LDI0Ljg5Niw5LDMxLjAzNCw5LDM4YzAsMTEuMDI4LDguOTcyLDIwLDIwLDIwICAgczIwLTguOTcyLDIwLTIwQzQ5LDMxLjAzNCw0NS40MTYsMjQuODk2LDQwLDIxLjMxNHogTTIwLDIwLjE1N1YxMC4yMkMyMCw1LjY4OCwyNC4wMzcsMiwyOSwyczksMy42ODgsOSw4LjIydjkuOTM4ICAgYy0wLjE4OC0wLjA5NS0wLjM4LTAuMTc5LTAuNTctMC4yNjhjLTAuMzkzLTAuMTg0LTAuNzkyLTAuMzU2LTEuMTk4LTAuNTE1Yy0wLjI2MS0wLjEwMi0wLjUyMy0wLjE5OC0wLjc4Ny0wLjI4OSAgIGMtMC4yNi0wLjA4OS0wLjUxOC0wLjE3OC0wLjc4Mi0wLjI1NmMtMC40MzctMC4xMy0wLjg3OS0wLjI0MS0xLjMyNC0wLjM0MWMtMC4xOTMtMC4wNDMtMC4zODctMC4wODQtMC41ODItMC4xMjIgICBjLTAuNTIzLTAuMTAxLTEuMDQ5LTAuMTgzLTEuNTc5LTAuMjQyYy0wLjEyLTAuMDEzLTAuMjQtMC4wMjEtMC4zNi0wLjAzMkMzMC4yMTMsMTguMDM2LDI5LjYwOCwxOCwyOSwxOHMtMS4yMTMsMC4wMzYtMS44MTYsMC4wOTIgICBjLTAuMTIsMC4wMTEtMC4yNDEsMC4wMTktMC4zNiwwLjAzMmMtMC41MywwLjA1OS0xLjA1NiwwLjE0MS0xLjU3OSwwLjI0MmMtMC4xOTUsMC4wMzctMC4zODksMC4wNzktMC41ODIsMC4xMjIgICBjLTAuNDQ1LDAuMS0wLjg4NywwLjIxMS0xLjMyNCwwLjM0MWMtMC4yNjQsMC4wNzgtMC41MjMsMC4xNjgtMC43ODIsMC4yNTZjLTAuMjY0LDAuMDkxLTAuNTI3LDAuMTg3LTAuNzg3LDAuMjg5ICAgYy0wLjQwNywwLjE1OC0wLjgwNSwwLjMzMS0xLjE5OCwwLjUxNUMyMC4zOCwxOS45NzgsMjAuMTg4LDIwLjA2MiwyMCwyMC4xNTd6IE0yOSw1NmMtOS45MjUsMC0xOC04LjA3NS0xOC0xOCAgIGMwLTYuNTM3LDMuNTE1LTEyLjI1NSw4Ljc0My0xNS40MDhjMC45Mi0wLjU1NCwxLjg4MS0xLjAyMSwyLjg3My0xLjQwMWMwLjE3Ni0wLjA2NywwLjM1My0wLjEzMywwLjUzMS0wLjE5NSAgIGMwLjI3My0wLjA5NSwwLjU0Ny0wLjE4NiwwLjgyNC0wLjI2OGMwLjM0LTAuMDk5LDAuNjg1LTAuMTg3LDEuMDMzLTAuMjY2YzAuMjU0LTAuMDU4LDAuNTA5LTAuMTA5LDAuNzY1LTAuMTU2ICAgYzAuMzY5LTAuMDY3LDAuNzQxLTAuMTI3LDEuMTE4LTAuMTcxYzAuMTctMC4wMjEsMC4zNDEtMC4wMzksMC41MTItMC4wNTRDMjcuOTI4LDIwLjAzNCwyOC40NiwyMCwyOSwyMHMxLjA3MiwwLjAzNCwxLjYwMSwwLjA4MSAgIGMwLjE3MSwwLjAxNiwwLjM0MSwwLjAzNCwwLjUxMiwwLjA1NGMwLjM3NywwLjA0NCwwLjc0OSwwLjEwNCwxLjExOCwwLjE3MWMwLjI1NiwwLjA0NywwLjUxMSwwLjA5OCwwLjc2NSwwLjE1NiAgIGMwLjM0OCwwLjA3OSwwLjY5MywwLjE2NywxLjAzMywwLjI2NmMwLjI3NywwLjA4MSwwLjU1MSwwLjE3MywwLjgyNCwwLjI2OGMwLjE3OSwwLjA2MiwwLjM1NSwwLjEyOCwwLjUzMSwwLjE5NSAgIGMwLjk5MiwwLjM4LDEuOTUzLDAuODQ3LDIuODczLDEuNDAxQzQzLjQ4NSwyNS43NDUsNDcsMzEuNDYzLDQ3LDM4QzQ3LDQ3LjkyNSwzOC45MjUsNTYsMjksNTZ6IiBmaWxsPSIjRkZGRkZGIi8+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==" />
+                    Log In
+                </button>
+            </div>
+        </form>
+    </div>

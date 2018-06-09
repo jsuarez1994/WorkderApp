@@ -1,0 +1,49 @@
+<!--Menu de navegación-->
+<nav class="navbar navbar-light bg-white">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#opciones">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  
+  <!-- logo -->
+  <a class="navbar-brand" [routerLink]="['']">
+    <img src="../assets/images/BRAND/brand.png" width="60" height="60" alt="brand">
+  </a>
+  
+  <!-- enlaces -->
+  <div class="collapse navbar-collapse" id="opciones">   
+    <ul class="navbar-nav ml-auto" *ngIf="!identity">
+      <li class="nav-item btn btn-info"><a [routerLink]="['login']" class="text-white"> Sign in</a></li>
+      <li class="nav-item btn btn-danger"><a [routerLink]="['registro']"  class="text-white"> Sign up</a></li>
+    </ul>
+
+    <div *ngIf="identity">
+
+      <ul class="navbar-nav text-left list-inline">
+        <li class="nav-item">
+          <a [routerLink]="['user', identity.sub]">
+            <img width="2%" class="opc" src="../assets/images/user.png" /> 
+          </a>
+        </li>
+
+        <li class="nav-item" >
+          <a [routerLink]="['logout', 1]">
+              <img width="2%" class="opc" src="../assets/images/logout.png" />
+          </a>
+        </li>
+      </ul>
+
+    </div>
+
+  </div>
+</nav>
+
+<!--Contenido-->
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-8">
+          <router-outlet></router-outlet><!--Indica el nombre del PATH de la vista-->
+      </div>
+      <div class="col-sm-2"></div>
+    </div>
+</div> 

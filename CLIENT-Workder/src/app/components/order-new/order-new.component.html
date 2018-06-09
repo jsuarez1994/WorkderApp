@@ -1,0 +1,67 @@
+  <!--Mensajes de alerta-->
+  <div class="alert alert-success" *ngIf="status == 'success'">
+    Inserción de la orden completada correctamente.
+  </div>
+
+  <div class="alert alert-danger" *ngIf="status == 'error'">
+    No se pudo asignar una orden de trabajo. Mira que todos los campos sean correctos
+  </div>
+
+  <h1 class="text-center text-uppercase">{{header}}</h1> <BR> 
+
+      <div class="d-flex justify-content-center">
+      <!--Formulario para asignar una orden-->
+      <form #newOrder='ngForm' (ngSubmit)="onSubmit(newOrder)" class="col-md-5">
+
+              <input type="text" placeholder="Introduzca titulo de la orden" name="title" #title="ngModel" [(ngModel)]="order.title" class="form-control" required>
+              <span *ngIf="!title.valid && title.touched" class="badge badge-danger">Titulo obligatorio obligatorio</span>
+              <br>
+
+              
+              <textarea placeholder="Descripción de la orden." name="description" #description="ngModel" [(ngModel)]="order.description" class="form-control" required></textarea>
+              <span *ngIf="!description.valid && description.touched" class="badge badge-danger">Descripción obligatoria</span>
+              <br>
+
+              <div class="form-row">
+                  <div class="form-group col-lg-6 align-self-center">
+                      <span id="basic-addon1">Dificultad: </span>
+                      <select name="difficulty" id="difficulty" #difficulty="ngModel" [(ngModel)]="order.difficulty" class="form-control" required>
+                        <option value="Alta" class="bg-danger text-light">Alta</option>
+                        <option value="Media" class="bg-warning text-light">Media</option>
+                        <option value="Baja" class="bg-success text-light">Baja</option>
+                      </select>
+                      <span *ngIf="!difficulty.valid && difficulty.touched"  class="badge badge-danger">Asigna dificultad</span>
+                  </div>
+
+                  <div class="form-group col-lg-6">
+                      <div class="form-group">
+                        <span id="basic-addon1">Fecha Inicio </span>
+                        <input type="date" class="col-md-6" name="dateInit" #dateInit="ngModel" [(ngModel)]="order.dateInit" class="form-control" required>
+                        <span *ngIf="!dateInit.valid && dateInit.touched" class="badge badge-danger">Fecha inicio obligatoria</span>                        
+                      </div>
+                      <br>
+                      <div class="form-group">
+                        <span id="basic-addon1"> Fecha Final </span>
+                        <input type="date" class="col-md-6" name="dateFinish" #dateFinish="ngModel" [(ngModel)]="order.dateFinish" class="form-control" required>
+                        <span *ngIf="!dateFinish.valid && dateFinish.touched" class="badge badge-danger">Fecha finalización obligatoria</span>                      
+                      </div>  
+                        
+                  </div>
+              </div>
+
+              <span class="input-group-addon" id="basic-addon1">Asignaselo a un empleado</span>
+              <select name="user" id="user" #id_Users="ngModel" [(ngModel)]="order.id_Users" class="form-control" required>
+                  <option *ngFor="let user of users"[value]="user.id">{{user.name}} {{user.surname}}</option>
+              </select>
+              <span *ngIf="!id_Users.valid && id_Users.touched"  class="badge badge-danger">Asigna la orden a un usuario</span>
+              
+              <br><br>
+
+              <div class="d-flex justify-content-center"> 
+                  <button type="submit" class="btn btn-info" [disabled]="!newOrder.form.valid">
+                    <img width="5%" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE2LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iNTEycHgiIGhlaWdodD0iNTEycHgiIHZpZXdCb3g9IjAgMCAxMjggMTI4IiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAxMjggMTI4IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPGc+Cgk8Zz4KCQk8cGF0aCBkPSJNOCwxMTJWMTZjMC00LjQxNCwzLjU5NC04LDgtOGg4MGM0LjQxNCwwLDgsMy41ODYsOCw4djQ3LjAzMWw4LThWMTZjMC04LjgzNi03LjE2NC0xNi0xNi0xNkgxNkM3LjE2NCwwLDAsNy4xNjQsMCwxNnY5NiAgICBjMCw4LjgzNiw3LjE2NCwxNiwxNiwxNmg0NHYtOEgxNkMxMS41OTQsMTIwLDgsMTE2LjQxNCw4LDExMnogTTg4LDI0SDI0djhoNjRWMjR6IE04OCw0MEgyNHY4aDY0VjQweiBNODgsNTZIMjR2OGg2NFY1NnogTTI0LDgwICAgIGgzMnYtOEgyNFY4MHogTTEyNS42NTYsNzJMMTIwLDY2LjM0NGMtMS41NjMtMS41NjMtMy42MDktMi4zNDQtNS42NTYtMi4zNDRzLTQuMDk0LDAuNzgxLTUuNjU2LDIuMzQ0bC0zNC4zNDQsMzQuMzQ0ICAgIEM3Mi43ODEsMTAyLjI1LDY4LDEwOC4yOTMsNjgsMTEwLjM0TDY0LDEyOGwxNy42NTYtNGMwLDAsOC4wOTQtNC43ODEsOS42NTYtNi4zNDRsMzQuMzQ0LTM0LjM0NCAgICBDMTI4Ljc4MSw4MC4xODgsMTI4Ljc4MSw3NS4xMjEsMTI1LjY1Niw3MnogTTg4LjQ5MiwxMTQuODJjLTAuNDUzLDAuNDMtMi4wMiwxLjQ4OC0zLjkzNCwyLjcwN2wtMTAuMzYzLTEwLjM2MyAgICBjMS4wNjMtMS40NTcsMi4yNDYtMi45MjIsMi45NzctMy42NDhsMjUuODU5LTI1Ljg1OWwxMS4zMTMsMTEuMzEzTDg4LjQ5MiwxMTQuODJ6IiBmaWxsPSIjRkZGRkZGIi8+Cgk8L2c+CjwvZz4KPC9zdmc+Cg==" />  
+                    Asignar Orden
+                  </button>
+              </div>
+      </form>
+      </div>

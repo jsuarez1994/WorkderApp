@@ -1,0 +1,73 @@
+  <div class="alert alert-success" *ngIf="status == 'success'">
+      Registro completado, identificate <a [routerLink]="['/login']">aquí</a>
+  </div>
+
+  <div class="alert alert-danger" *ngIf="status == 'error'">
+      Registro no completado
+  </div>
+
+<!--Formulario-->
+<h1 class="display-1 text-center">{{title}}</h1> <BR> 
+    <div class="d-flex justify-content-center">            
+            <form #registerForm='ngForm' (ngSubmit)="onSubmit(registerForm)" class="col-md-5">
+
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-envelope"></span></span>
+                        <input type="email" placeholder="Email" name="email" #email="ngModel" [(ngModel)]="user.email" class="form-control" required>
+                    </div>
+                    <span *ngIf="!email.valid && email.touched" class="badge">Email obligatorio</span>
+                    <br>
+    
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-lock"></span></span>
+                        <input type="password" placeholder="Password" name="password" #password="ngModel" [(ngModel)]="user.password" class="form-control" required>
+                    </div>
+                    <span *ngIf="!password.valid && password.touched" class="badge">Password obligatorio</span>
+                    <br>
+    
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
+                        <input type="text" placeholder="Nombre" name="name" #name="ngModel" [(ngModel)]="user.name" class="form-control" required>
+                    </div>
+                    <span *ngIf="!name.valid && name.touched"  class="badge">Nombre obligatorio</span>
+                    <br>
+    
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
+                        <input type="text" placeholder="Apellidos" name="surname" #surname="ngModel" [(ngModel)]="user.surname" class="form-control" required>
+                    </div>
+                    <span *ngIf="!surname.valid && surname.touched" class="badge">Apellidos obligatorio</span>
+                    <br>
+    
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-sort-by-order"></span></span>
+                        <input type="number" placeholder="Edad" name="age" #age="ngModel" [(ngModel)]="user.age" class="form-control" required>
+                    </div>
+                    <span *ngIf="!age.valid && age.touched" class="badge">Edad obligatoria</span>
+                    <br>
+    
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-heart"></span></span>
+                        <select name="sex" #sex="ngModel" [(ngModel)]="user.sex" id="sex" class="form-control" >
+                                <option value="Hombre" selected>Hombre</option>
+                                <option value="Mujer">Mujer</option>
+                        </select>
+                    </div>
+                    <br>
+    
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-briefcase"></span></span>
+                        <select name="id_Company" #id_Company="ngModel" [(ngModel)]="user.id_Company" id="company" class="form-control" >
+                            <option *ngFor="let company of companys" [value]="company.id">{{company.name}}</option>
+                        </select>
+                    </div>
+    
+                    <br>
+                    <div class="d-flex justify-content-center"> 
+                        <button type="submit" class="btn btn-danger" [disabled]="!registerForm.form.valid">
+                            <img width="5%" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjUxMnB4IiBoZWlnaHQ9IjUxMnB4IiB2aWV3Qm94PSIwIDAgMjcuMDIxIDI3LjAyMiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMjcuMDIxIDI3LjAyMjsiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8Zz4KCTxnPgoJCTxwYXRoIGQ9Ik0xNy44NTUsMjEuMjIzYzAtMS45MDIsMS4wNDktMy41NSwyLjU4OC00LjQ0Yy0wLjk2My0wLjMwOC0yLTAuNTUyLTMuMDktMC43MjJjMi4zNDItMS4yOTksMy45MjktMy43OTQsMy45MjktNi42NjMgICAgYzAtNC4yMDctMy40MS03LjYxNy03LjYxNy03LjYxN3MtNy42MTcsMy40MS03LjYxNyw3LjYxN2MwLDIuODY4LDEuNTg3LDUuMzY0LDMuOTI5LDYuNjYzQzQuMjIzLDE2Ljk1OCwwLDE5Ljg5NywwLDIzLjM4OWgxOC4zNSAgICBDMTguMDQxLDIyLjcyNywxNy44NTUsMjIsMTcuODU1LDIxLjIyM3oiIGZpbGw9IiNGRkZGRkYiLz4KCTwvZz4KCTxwYXRoIGQ9Ik0yMy4wMDQsMTcuMjA2Yy0yLjIxOCwwLTQuMDE4LDEuNzk3LTQuMDE4LDQuMDE4YzAsMi4yMTksMS44LDQuMDE3LDQuMDE4LDQuMDE3YzIuMjE5LDAsNC4wMTgtMS43OTgsNC4wMTgtNC4wMTcgICBDMjcuMDIsMTkuMDAyLDI1LjIyMywxNy4yMDYsMjMuMDA0LDE3LjIwNnogTTI1LjYyNywyMS45MzZoLTEuOTA5djEuOTFoLTEuNDI3di0xLjkxaC0xLjkxdi0xLjQyOWgxLjkxdi0xLjkxMWgxLjQyN3YxLjkxMWgxLjkwOSAgIFYyMS45MzZ6IiBmaWxsPSIjRkZGRkZGIi8+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==" />
+                            Register
+                        </button>
+                    </div>
+            </form>
+    </div>
